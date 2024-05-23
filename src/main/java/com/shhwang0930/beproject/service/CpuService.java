@@ -35,7 +35,7 @@ public class CpuService {
 
     public void saveCpuUsage(double cpuUsage){
         CpuUsageMinute cpuUsageMinute = new CpuUsageMinute();
-        cpuUsageMinute.setUsage(cpuUsage);
+        cpuUsageMinute.setUsage(cpuUsage);c
         cpuUsageMinute.setTimestamp(LocalDateTime.now());
         cpuUsageMinuteRepository.save(cpuUsageMinute);
     }
