@@ -1,12 +1,14 @@
 package com.shhwang0930.beproject.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "days")
+@Setter
+@Getter
 public class CpuUsageDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

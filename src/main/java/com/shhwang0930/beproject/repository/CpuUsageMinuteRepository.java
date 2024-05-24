@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface CpuUsageMinuteRepository extends JpaRepository<CpuUsageMinute,Long> {
     List<CpuUsageMinute> findAllByTimestampBetween(LocalDateTime s, LocalDateTime e);
+    void deleteByTimestampBefore(LocalDateTime t);
 }
