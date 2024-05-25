@@ -43,3 +43,6 @@ Swagger를 사용하여 API 문서화를 설정하세요. : http://localhost:808
 
 
 **일 단위 API** : 최근 1년 데이터 제공 : CpuService 내의 deleteDay에서  매년 1월 1일 자정 1년전의 일 단위 CPU사용률을 DB에서 삭제(분 단위 사용률 삭제)
+
+
+api 명세서 노션 주소 : https://www.notion.so/e87b2fb55d624d43884d88872922b3ac?v=6e72f2f66da042f782b2cfef4e93e5a5
