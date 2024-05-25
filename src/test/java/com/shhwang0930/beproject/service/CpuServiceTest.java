@@ -12,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.actuate.metrics.MetricsEndpoint;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -405,5 +404,44 @@ class CpuServiceTest {
 
         // then
         verify(cpuUsageDayRepository, never()).save(any());
+    }
+
+    @Test
+    @DisplayName("1주뒤 분단위 사용률 삭제")
+    public void testDeleteMinute() {
+        // Given
+        LocalDateTime oneWeekAgo = LocalDateTime.now().minusWeeks(1);
+
+        // When
+        cpuService.deleteMinute();
+
+        // Then
+        verify(cpuUsageMinuteRepository, times(1)).deleteByTimestampBefore(oneWeekAgo);
+    }
+
+    @Test
+    @DisplayName("3달뒤 시단위 사용률 삭제")
+    public void testDeleteHour() {
+        // Given
+        LocalDateTime threeMonthAgo = LocalDateTime.now().minusMonths(3);
+
+        // When
+        cpuService.deleteHour();
+
+        // Then
+        verify(cpuUsageHourRepository, times(1)).deleteByTimestampBefore(threeMonthAgo);
+    }
+
+    @Test
+    @DisplayName("1년뒤 일단위 사용률 삭제")
+    public void testDeleteDay() {
+        // Given
+        LocalDateTime oneYearAgo = LocalDateTime.now().minusYears(1);
+
+        // When
+        cpuService.deleteDay();
+
+        // Then
+        verify(cpuUsageDayRepository, times(1)).deleteByTimestampBefore(oneYearAgo);
     }
 }

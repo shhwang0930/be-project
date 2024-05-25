@@ -26,7 +26,7 @@ public class CpuService {
     private final MetricsEndpoint metricsEndpoint;
 
     // 분 단위로 cpu 사용률 측정 및 저장
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 60000)
     @Transactional
     public void checkCpuUsage() {
         MetricsEndpoint.MetricResponse metric = metricsEndpoint.metric("system.cpu.usage", null);
@@ -46,10 +46,10 @@ public class CpuService {
 
     // 분 단위 cpu 조회
     public List<CpuUsageMinute> getCpuUsageMinute(LocalDateTime s, LocalDateTime e){
+        if (s.isAfter(e)) {
+            throw new IllegalArgumentException("시작 시간이 종료 시간보다 늦습니다.");
+        }
         try {
-            if (s.isAfter(e)) {
-                throw new IllegalArgumentException("시작 시간이 종료 시간보다 늦습니다.");
-            }
             return cpuUsageMinuteRepository.findAllByTimestampBetween(s, e);
         } catch (Exception ex) {
             log.error("getCpuUsageMinute 메서드에서 예외 발생", ex);
@@ -59,10 +59,10 @@ public class CpuService {
 
     // 시 단위의 cpu 사용률 조회
     public List<CpuUsageHour> getCpuUsageHour(LocalDateTime s, LocalDateTime e){
+        if (s.isAfter(e)) {
+            throw new IllegalArgumentException("시작 시간이 종료 시간보다 늦습니다.");
+        }
         try {
-            if (s.isAfter(e)) {
-                throw new IllegalArgumentException("시작 시간이 종료 시간보다 늦습니다.");
-            }
             return cpuUsageHourRepository.findAllByTimestampBetween(s,e);
         } catch (Exception ex) {
             log.error("getCpuUsageHour 메서드에서 예외 발생", ex);
@@ -71,10 +71,10 @@ public class CpuService {
     }
 
     public List<CpuUsageDay> getCpuUsageDay(LocalDateTime s, LocalDateTime e){
+        if (s.isAfter(e)) {
+            throw new IllegalArgumentException("시작 시간이 종료 시간보다 늦습니다.");
+        }
         try {
-            if (s.isAfter(e)) {
-                throw new IllegalArgumentException("시작 시간이 종료 시간보다 늦습니다.");
-            }
             return cpuUsageDayRepository.findAllByTimestampBetween(s,e);
         } catch (Exception ex) {
             log.error("getCpuUsageDay 메서드에서 예외 발생", ex);

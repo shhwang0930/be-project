@@ -16,9 +16,8 @@ public class CpuUsageMinute {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
+    @Column(name = "`usage`")
     private double usage;
-
+    @Column
     private LocalDateTime timestamp;
 }

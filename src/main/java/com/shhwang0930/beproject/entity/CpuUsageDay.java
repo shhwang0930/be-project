@@ -14,9 +14,13 @@ public class CpuUsageDay {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private double min;
+    @Column
     private double max;
+    @Column
     private double avr;
 
+    @Column
     private LocalDateTime timestamp;
 }
